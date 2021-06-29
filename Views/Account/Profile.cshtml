@@ -1,0 +1,141 @@
+﻿@model BuildingCompany.Models.HelperEntityes.MemberV2
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Профиль</title>
+</head>
+<body>
+    <div class="wrap">
+    <div class="myprofile">
+        <form asp-action="Profile" class="main-mp">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="member.id" />
+            <div class="right-wrap">
+            <h3>About me:</h3>
+
+            <div class="form-container">
+                <div class="about-form">
+
+                    <div class="about">
+                        <label class="l" for="name">Name: </label>
+                        <input asp-for="member.name" class="form-control" id="name" />
+                        <span asp-validation-for="member.name" class="text-danger"></span>
+                    </div>
+                    <div class="about">
+                        <label class="l" for="secondname">Surname: </label>
+                        <input asp-for="member.surname" class="form-control" id="surname" />
+                        <span asp-validation-for="member.surname" class="text-danger"></span>
+                    </div>
+                    <div class="about">
+                        <label class="l" for="patronymic">Patronymic: </label>
+                        <input asp-for="member.patronymic" class="form-control" id="patronymic" />
+                        <span asp-validation-for="member.patronymic" class="text-danger"></span>
+                    </div>
+                    <div class="about">
+                        <label class="l" for="e-mail">E-mail: </label>
+                        <input asp-for="member.email" class="form-control" id="e-mail" />
+                        <span asp-validation-for="member.email" class="text-danger"></span>
+                    </div>
+                    <div class="about">
+                        <label class="l" for="number">Phone number: </label>
+                        <input asp-for="member.phone_number" class="form-control" id="number" />
+                        <span asp-validation-for="member.phone_number" class="text-danger"></span>
+                    </div>
+                    <div class="about">
+                        <label class="l" for="number">Phone number: </label>
+                        <input asp-for="member.specialisation" class="form-control" id="number" readonly/>
+                        <span asp-validation-for="member.specialisation" class="text-danger"></span>
+                    </div>
+                    <div class="about">
+                        <label class="l" for="country">Salary: </label>
+                        <input asp-for="member.salary" class="form-control" id="country" readonly/>
+                        <span asp-validation-for="member.salary" class="text-danger"></span>
+                    </div>
+                    <div class="about">
+                        <label class="l" for="city">Date of employment: </label>
+                        <input asp-for="member.date_of_employment" class="form-control" id="city" readonly/>
+                        <span asp-validation-for="member.date_of_employment" class="text-danger"></span>
+                    </div>
+
+                    <input type="hidden" asp-for="member.password_hash" id="password_hash" />
+                </div>
+            </div>
+            </div>
+
+            <div class="save-btn">
+                <input type="submit" value="Сохранить" class="btn" />
+            </div>
+        </form>
+    </div>
+    <div class="left-wrap">
+        <div class="form-group">
+            <div class="btn-nav">
+                <!--@if (DbConnection.UserRole == Role.Foreman)
+                {
+                    <div class="btn">
+                        @Html.ActionLink("My Workers", "MyWorkers", new { id = Model.member.id })
+                    </div>
+                    <div class="btn">
+                        @Html.ActionLink("Created Works", "ForemanWorks")
+                    </div>
+                }-->
+                
+                @if (DbConnection.UserRole == Role.Workers)
+                {
+                    <div class="btn">
+                        @Html.ActionLink("My Works", "MyWorks", new { id = Model.member.id })
+                        <!--a asp-area="" asp-controller="Account" asp-action="MyWorks">My works</a-->
+                    </div>
+                }
+                @if (DbConnection.UserRole == Role.Admin)
+                {
+                    <div class="btn">
+                        <a asp-area="" asp-controller="Account" asp-action="Deals">Deals</a>
+                    </div>
+                }
+                </div>
+                <form method="post" asp-action="ChangePassword" class="main-mp">
+                    <div class="modal">
+                        <h3>Изменение пароля</h3>
+                        <input type="hidden" asp-for="passwordChanger.memberId" />
+                        <label class="l" for="password">Введите старый пароль: </label>
+                        <input asp-for="passwordChanger.oldPassword" class="form-control" id="password" type="password" />
+                        <label class="l" for="password2">Введите новый пароль: </label>
+                        <input asp-for="passwordChanger.newPassword1" class="form-control" id="password2" type="password" />
+                        <label class="l" for="password3">Повторите новый пароль: </label>
+                        <input asp-for="passwordChanger.newPassword2" class="form-control" id="password3" type="password" />
+                        <label class="l" id="error_label"></label>
+                        <div class="btn" onclick="ChangePassword()">Сохранить</div>
+                        <div style="display: none;">
+                            <button type="submit" id="confirmButton"></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            </div>
+            <span asp-validation-for="Error" class="text-danger"></span>
+        </div>
+    </div>
+    </div>
+
+
+    <!--div>
+        <a asp-action="Profile">Back to List</a>
+    </div-->
+
+    @section Scripts {
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</body>
+</html>
+
+
+
+

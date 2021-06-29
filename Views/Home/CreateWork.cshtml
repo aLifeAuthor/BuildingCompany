@@ -1,0 +1,59 @@
+﻿@model BuildingCompany.Models.Entityes.Works
+@{
+    ViewData["Title"] = "CreateLecture";
+}
+
+<form class="main" asp-action="CreateWork">
+    <h3>Create work</h3>
+    <div class="about-form">
+        <div class="about">
+            <label for="lectureName" class="l">Enter worker id: </label>
+            @if (DbConnection.UserRole == Role.Foreman)
+            {
+                <div>
+                    <input asp-for="member_id" class="tainput" id="lectureName" required />
+                    <div class="btn">
+                        @Html.ActionLink("Choose Worker", "MyWorkers", "Account")
+                    </div>
+                </div>
+            }
+            @if (DbConnection.UserRole == Role.Director)
+            {
+                <div>
+                    <input asp-for="member_id" class="tainput" id="lectureName" required />
+                    <div class="btn">
+                        @Html.ActionLink("Choose Member", "Members", "Home")
+                    </div>
+                </div>
+            }
+            <span asp-validation-for="member_id" class="text-danger"></span>
+        </div>
+        <div class="about">
+            <label for="lectureDirection" class="l">Id facility: </label>
+            <input asp-for="facility_id" class="tainput" id="lectureDirection" required readonly />
+            <span asp-validation-for="facility_id" class="text-danger"></span>
+        </div>
+        <div class="about">
+            <p for="lectureThesys" class="l">Введите дату начала: </p>
+            <input asp-for="start_date" class="tainput" id="lectureThesys" type="date" required></input>
+            <span asp-validation-for="start_date" class="text-danger"></span>
+        </div>
+        <div class="about">
+            <p for="lectureThesys" class="l">Введите дату окончания: </p>
+            <input asp-for="end_date" class="tainput" id="lectureThesys" type="date" required></input>
+            <span asp-validation-for="end_date" class="text-danger"></span>
+        </div>
+        <div class="about">
+            <p for="lectureThesys" class="l">Введите название: </p>
+            <input asp-for="name" class="tainput" id="lectureThesys" required/>
+            <span asp-validation-for="name" class="text-danger"></span>
+        </div>
+        <div class="about">
+            <p for="lectureThesys" class="l">Введите описание: </p>
+            <textarea asp-for="description" maxlength="500" class="tainput" id="lectureThesys" required></textarea>
+            <span asp-validation-for="description" class="text-danger"></span>
+        </div>
+
+        <button class="btn" type="submit">Сохранить</button>
+    </div>
+</form>

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<BuildingCompany.Models.HelperEntityes.MemberV2>
+
+@{
+    ViewData["Title"] = "MyWorkers";
+}
+
+<div class="main">
+    <h3>Workers</h3>
+
+    <table>
+
+        <tr class="headRow">
+            <th> № </th>
+            <th> @Html.DisplayNameFor(model => model.member.name)</th>
+            <th> @Html.DisplayNameFor(model => model.member.surname)</th>
+            <th> @Html.DisplayNameFor(model => model.member.patronymic)</th>
+            <th> Busy</th>
+            <th> @Html.DisplayNameFor(model => model.member.salary)</th>
+            <th> @Html.DisplayNameFor(model => model.member.phone_number)</th>
+            <th> @Html.DisplayNameFor(model => model.member.email)</th>
+            @if(DbConnection.UserRole == Role.Accountant) {
+                <th></th>
+            }
+            
+
+
+        </tr>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="tableRow">
+                    <td> @Html.DisplayFor(modelItem => item.member.id)</td>
+                    <td> @Html.DisplayFor(modelItem => item.member.name)</td>
+                    <td> @Html.DisplayFor(modelItem => item.member.surname)</td>
+                    <td> @Html.DisplayFor(modelItem => item.member.patronymic)</td>
+                    <td> @Html.DisplayFor(modelItem => item.WorkAmount)</td>
+                    <td> @Html.DisplayFor(modelItem => item.member.salary)</td>
+                    <td> @Html.DisplayFor(modelItem => item.member.phone_number)</td>
+                    <td> @Html.DisplayFor(modelItem => item.member.email)</td>
+
+                    @if (DbConnection.UserRole == Role.Accountant)
+                    {
+                        <td>
+                            <div class="btn">
+                                @Html.ActionLink("Edit salary", "EditSalary", "Home", new { id = item.member.id })
+                            </div>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

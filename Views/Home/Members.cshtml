@@ -1,0 +1,62 @@
+﻿@model IEnumerable<BuildingCompany.Models.Entityes.Members>
+
+@{
+    ViewData["Title"] = "MyWorkers";
+}
+
+    <div class="main">
+        <h3>Members</h3>
+
+        <div class="btn">
+            @Html.ActionLink("Create member", "CreateMember", "Home")
+        </div>
+
+        <table>
+            <tr class="headRow">
+                <th> № </th>
+                <th> @Html.DisplayNameFor(model => model.name)</th>
+                <th> @Html.DisplayNameFor(model => model.surname)</th>
+                <th> @Html.DisplayNameFor(model => model.patronymic)</th>
+                <th> @Html.DisplayNameFor(model => model.salary)</th>
+                <th> @Html.DisplayNameFor(model => model.phone_number)</th>
+                <th> @Html.DisplayNameFor(model => model.email)</th>
+                @if (DbConnection.UserRole == Role.Accountant || DbConnection.UserRole == Role.Director)
+                {
+                    <th></th>
+                }
+            </tr>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr class="tableRow">
+                    <td> @Html.DisplayFor(modelItem => item.id)</td>
+                    <td> @Html.DisplayFor(modelItem => item.name)</td>
+                    <td> @Html.DisplayFor(modelItem => item.surname)</td>
+                    <td> @Html.DisplayFor(modelItem => item.patronymic)</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.salary)
+                    </td>
+                    <td> @Html.DisplayFor(modelItem => item.phone_number)</td>
+                    <td> @Html.DisplayFor(modelItem => item.email)</td>
+                    @if (DbConnection.UserRole == Role.Accountant)
+                    {
+                        <td>
+                            <div class="btn">
+                                @Html.ActionLink("Edit salary", "EditSalary", "Home", new { id = item.id })
+                            </div>
+                        </td>
+                    }
+                    @if (DbConnection.UserRole == Role.Director && item.role_id == 4)
+                    {
+                        <td>
+                            <div class="btn">
+                                @Html.ActionLink("Choose", "CreateWork", "Home", new { id = item.id, f_id = false })
+                            </div>
+                        </td>
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>

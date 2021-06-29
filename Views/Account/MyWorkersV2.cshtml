@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BuildingCompany.Models.Entityes.Members>
+
+@{
+    ViewData["Title"] = "MyWorkers";
+}
+
+<div class="main">
+    <h3>My Workers</h3>
+
+    <table>
+
+        <tr class="headRow">
+            <th> № </th>
+            <th> @Html.DisplayNameFor(model => model.name)</th>
+            <th> @Html.DisplayNameFor(model => model.surname)</th>
+            <th> @Html.DisplayNameFor(model => model.patronymic)</th>
+            <th> @Html.DisplayNameFor(model => model.salary)</th>
+            <th> @Html.DisplayNameFor(model => model.phone_number)</th>
+            <th> @Html.DisplayNameFor(model => model.email)</th>
+            <th></th>
+        </tr>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="tableRow">
+                    <td> @Html.DisplayFor(modelItem => item.id)</td>
+                    <td> @Html.DisplayFor(modelItem => item.name)</td>
+                    <td> @Html.DisplayFor(modelItem => item.surname)</td>
+                    <td> @Html.DisplayFor(modelItem => item.patronymic)</td>
+                    <td> @Html.DisplayFor(modelItem => item.salary)</td>
+                    <td> @Html.DisplayFor(modelItem => item.phone_number)</td>
+                    <td> @Html.DisplayFor(modelItem => item.email)</td>
+
+                    <td>
+                        <div class="btn">
+                            @Html.ActionLink("Take to Work", "CreateWork", "Home", new { id = item.id, f_id = false })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

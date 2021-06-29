@@ -1,0 +1,52 @@
+﻿@model IEnumerable<BuildingCompany.Models.Entityes.Facility>
+
+@{
+    ViewData["Title"] = "Facility";
+}
+
+<div class="main">
+    <h3>Facility</h3>
+    <table>
+        <tr class="headRow">
+            <th> @Html.DisplayNameFor(model => model.id) </th>
+            <th> @Html.DisplayNameFor(model => model.date_of_start)</th>
+            <th> @Html.DisplayNameFor(model => model.time)</th>
+            <th> @Html.DisplayNameFor(model => model.number_of_floors)</th>
+            <th> @Html.DisplayNameFor(model => model.area)</th>
+            <th> @Html.DisplayNameFor(model => model.adress)</th>
+            <th></th>
+        </tr>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr class="tableRow">
+                <td> @Html.DisplayFor(modelItem => item.id)</td>
+                <td> @Html.DisplayFor(modelItem => item.date_of_start)</td>
+                <td> @Html.DisplayFor(modelItem => item.time)</td>
+                <td> @Html.DisplayFor(modelItem => item.number_of_floors)</td>
+                <td> @Html.DisplayFor(modelItem => item.area)</td>
+                <td> @Html.DisplayFor(modelItem => item.adress)</td>
+
+                @if (DbConnection.UserRole == Role.Foreman)
+                {
+                    <td>
+                        <div class="btn">
+                            @Html.ActionLink("Add Work", "CreateWork", new { id = item.id, f_id = true })
+                        </div>
+                    </td>
+                }
+
+                @if (DbConnection.UserRole == Role.Director)
+                {
+                    <td>
+                        <div class="btn">
+                            @Html.ActionLink("Add foreman", "CreateWork", new { id = item.id, f_id = true })
+                        </div>
+                    </td>
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,20 @@
+﻿@model BuildingCompany.Models.DB_User
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<form mathod="post" asp-action="Login" class="table__inner">
+    <div class="log">        
+        <h1>Log in</h1>
+        <div class="input">
+            <input asp-for="Login" class="input" required placeholder="e-mail"/>
+            <span asp-validation-for="Login" class="label"></span>
+        </div>
+        <div class="input">
+            <input asp-for="Password" class="input" type="password" required placeholder="password"/>
+            <span asp-validation-for="Password" class="label"></span>            
+        </div>
+        <button type="submit" class="btn">Войти</button>
+    </div>    
+</form>

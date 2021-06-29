@@ -1,0 +1,43 @@
+﻿@model IEnumerable<BuildingCompany.Models.HelperEntityes.DealsV2>
+
+@{
+    ViewData["Title"] = "MyWorkers";
+}
+
+<div class="main">
+    <h3>Deals</h3>
+
+    <table>
+
+        <tr class="headRow">
+            <th> № </th>
+            <th> Price</th>
+            <th> Date</th>
+            <th> Company info</th>
+
+        </tr>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="tableRow">
+                    <td> @Html.DisplayFor(modelItem => item.Deal.id)</td>
+                    <td> @Html.DisplayFor(modelItem => item.Deal.price)</td>
+                    <td> @Html.DisplayFor(modelItem => item.Deal.date.Date)</td>
+
+                    <td> 
+                        @Html.DisplayFor(modelItem => item.Companie.comp_name)
+                        phone numbe: @Html.DisplayFor(modelItem => item.Companie.phone_number)
+                        e-mail: @Html.DisplayFor(modelItem => item.Companie.email)
+                    </td>
+                    
+                    <!--td>
+                        <div class="btn">
+                            Html.ActionLink("Edit salary", "EditSalary", "Home", new { id = item.id })
+                        </div>
+                    </td-->
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

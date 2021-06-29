@@ -1,0 +1,39 @@
+﻿
+@model IEnumerable<BuildingCompany.Models.Entityes.Companies>
+
+@{
+    ViewData["Title"] = "MyWorkers";
+}
+
+<div class="main">
+    <h3>Companies</h3>
+
+    <table>
+
+        <tr class="headRow">
+            <th> № </th>
+            <th> Phone number</th>
+            <th> Email</th>
+            <th> Company name</th>
+            <th> </th>
+        </tr>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="tableRow">
+                    <td> @Html.DisplayFor(modelItem => item.id)</td>
+                    <td> @Html.DisplayFor(modelItem => item.phone_number)</td>
+                    <td> @Html.DisplayFor(modelItem => item.email)</td>
+                    <td> @Html.DisplayFor(modelItem => item.comp_name)</td>
+
+                    <td>
+                        <div class="btn">
+                            @Html.ActionLink("Edit", "EditCompanies", "Home", new { id = item.id })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

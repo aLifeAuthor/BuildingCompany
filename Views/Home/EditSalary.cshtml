@@ -1,0 +1,82 @@
+﻿@model BuildingCompany.Models.HelperEntityes.MemberV2
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <div class="myprofile-1">
+        <form asp-action="EditSalary" class="main-mp">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="member.id" />
+            <h3>Edit Salary</h3>
+            <div class="form-container">
+                <div class="about-form">
+
+                    <div class="about">
+                        <label class="l" for="name">Имя: </label>
+                        <input asp-for="member.name" class="form-control" id="name" readonly />
+                        <span asp-validation-for="member.name" class="text-danger"></span>
+                    </div>
+                    <div class="about">
+                        <label class="l" for="secondname">Фамилия: </label>
+                        <input asp-for="member.surname" class="form-control" id="surname" readonly />
+                        <span asp-validation-for="member.surname" class="text-danger"></span>
+                    </div>
+                    <div class="about">
+                        <label class="l" for="patronymic">Отчество: </label>
+                        <input asp-for="member.patronymic" class="form-control" id="patronymic" readonly />
+                        <span asp-validation-for="member.patronymic" class="text-danger"></span>
+                    </div>
+                    <div class="about">
+                        <label class="l" for="e-mail">e-mail: </label>
+                        <input asp-for="member.email" class="form-control" id="e-mail" readonly />
+                        <span asp-validation-for="member.email" class="text-danger"></span>
+                    </div>
+                    <div class="about">
+                        <label class="l" for="number">Номер телефона: </label>
+                        <input asp-for="member.phone_number" class="form-control" id="number" readonly />
+                        <span asp-validation-for="member.phone_number" class="text-danger"></span>
+                    </div>
+
+                    <div class="about">
+                        <label class="l" for="country">Salary: </label>
+                        <input asp-for="member.salary" class="form-control" id="country" />
+                        <span asp-validation-for="member.salary" class="text-danger"></span>
+                    </div>
+                    <div class="about">
+                        <label class="l" for="city">Город: </label>
+                        <input asp-for="member.date_of_employment" class="form-control" id="city" readonly />
+                        <span asp-validation-for="member.date_of_employment" class="text-danger"></span>
+                    </div>
+
+                    <input type="hidden" asp-for="member.password_hash" id="password_hash" />
+                </div>
+            </div>
+
+            <div class="save-btn">
+                <input type="submit" value="Сохранить" class="btn" />
+            </div>
+            <div class="btn">
+                <a asp-action="Workers" asp-controller="Home">Back to List</a>
+            </div>
+        </form>
+        <span asp-validation-for="Error" class="text-danger"></span>
+
+
+    </div>
+    @section Scripts {
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</body>
+</html>
+
+
+
+

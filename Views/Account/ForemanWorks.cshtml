@@ -1,0 +1,48 @@
+﻿@model IEnumerable<BuildingCompany.Models.HelperEntityes.WorksV2>
+
+@{
+    ViewData["Title"] = "MyWorks";
+}
+
+<div class="main">
+    <h3>Created Works</h3>
+
+    <div class="btn">
+        <a  asp-action="Facility" asp-controller="Home">Create New</a>
+    </div>
+
+    <table>
+        <tr class="headRow">
+            <th> @Html.DisplayNameFor(model => model.work.id) </th>
+            <th> @Html.DisplayNameFor(model => model.work.start_date)</th>
+            <th> @Html.DisplayNameFor(model => model.work.end_date)</th>
+            <th> @Html.DisplayNameFor(model => model.work.name)</th>
+            <th> @Html.DisplayNameFor(model => model.work.description)</th>
+            <th> @Html.DisplayNameFor(model => model.work.facility_id)</th>
+            <th> Worker Info</th>
+            <th></th>
+        </tr>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="tableRow">
+                    <td> @Html.DisplayFor(modelItem => item.work.id)</td>
+                    <td> @Html.DisplayFor(modelItem => item.work.start_date)</td>
+                    <td> @Html.DisplayFor(modelItem => item.work.end_date)</td>
+                    <td> @Html.DisplayFor(modelItem => item.work.name)</td>
+                    <td> @Html.DisplayFor(modelItem => item.work.description)</td>
+                    <td> @Html.DisplayFor(modelItem => item.work.facility_id)</td>
+                    <td> @Html.DisplayFor(modelItem => item.worker.name) 
+                         @Html.DisplayFor(modelItem => item.worker.surname) 
+                         phone number: @Html.DisplayFor(modelItem => item.worker.phone_number) 
+                         email: @Html.DisplayFor(modelItem => item.worker.email)
+                    </td>
+                    <!--td>
+                        @Html.ActionLink("Add Worker", "MyWorkers", new { id = item.work.id })
+                    </td-->
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
